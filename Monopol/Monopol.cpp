@@ -6,6 +6,7 @@
 #include <fstream>
 
 #define RZUTY 100
+#define JAIL true
 
 int randomNumber;
 int p[40] = {0};
@@ -35,11 +36,14 @@ int main() {
     while (throws < RZUTY) {
         randomNumber = dist(rng);
         currentPosition += randomNumber;
+        
         if (currentPosition > 39) {
             currentPosition = currentPosition - 40;
         }
+
         p[currentPosition]++;
-        if (currentPosition == 30) {
+        
+        if (JAIL && currentPosition == 30) {
             currentPosition = 10;
             p[currentPosition]++;
         }
