@@ -142,10 +142,27 @@ std::string fileName(int fileIterator) {
     return x.str();
 }
 
+int countDensity(std::vector<std::vector<uint8_t>>& table) {
+    int count = 0;
+    for (int i = 0; i < DIM; i++) {
+        for (int j = 0; j < DIM; j++) {
+            if (table[i][j] == 1)
+                count++;
+        }
+    }
+    return count;
+}
+
 int main() {
     gen_data(data);
+
+    std::ofstream outFile("densityData.csv");
+    
     for (int i = 0; i < STEPS; i++) {
+        outFile << i << "," << countDensity(data) << std::endl;
         save(fileName(i));
         step(data);
     }
+    
+    outFile.close();
 }
