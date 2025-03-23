@@ -188,11 +188,10 @@ void runSimulationForSize(int size, std::map<int, std::vector<double>>& results)
     DIM = size;
     std::vector<double> errors;
 
-    for (int i = 0; i < 5; i++) {
+    for (int i = 0; i < 100; i++) {
         errors.push_back(makeAndCount());
     }
 
-    std::lock_guard<std::mutex> lock(mtx);
     results[size] = errors;
 }
 
